@@ -1,0 +1,43 @@
+.options {
+     color: white;
+    background-color: #363636;
+    padding: 10px;
+    display: block;
+    text-decoration: none;
+    width: 100%;
+    margin-bottom: -20px;
+    margin-left: -10px;
+    border: 1px solid white;
+  font-family: 'Nanum Gothic', sans-serif;
+font-family: 'Dosis', sans-serif;
+font-family: 'Raleway', sans-serif;
+}
+.options:visit{
+	text-decoration: none;
+}
+.options:focus{
+    background: #3d7bae;
+}
+.pesquisa{
+	border-radius: 25px;
+    width: 300px;
+    margin-left: 34%;
+    height: 27px;
+}
+.h1pesquisa{
+	text-transform: uppercase;
+	margin-left: 23%;
+    margin-top: 5%;
+    font-size: 40PX;
+}
+.bdnone{
+	border:none !important;
+}
+.bg{
+    background: #363636;
+}
+.logo{
+    position: absolute;
+    top: 10%;
+    left: 28%;
+}
