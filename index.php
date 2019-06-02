@@ -18,6 +18,15 @@
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
+        
+        <?php 
+
+            session_start();
+    
+            if(!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'SIM'){
+                header('Location: login.php?login=erro2');
+            }
+        ?>
 
         <section class="navbar-container">
             <div class="container-fluid px-5">
@@ -27,8 +36,9 @@
                     </div>
                     <div class="user-section ml-auto">
                         <div class="user-name">
-                            <h6>Bem-vindo! <span>Leandro</span></h6>
+                            <h6>Bem-vindo, <span><?php echo $_SESSION['userlogado'];?>! | </span><a class="" href="logoff.php">Sair</a></h6>     
                         </div>
+                         
                     </div>
                 </div>
             </div>
