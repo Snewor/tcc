@@ -35,6 +35,37 @@ window.Promapa = {
                         var result = xhr.responseText;
                          $("#resultTable").html(result);
                     }})
+        },
+        adicionarProtocolo: function(){
+             var dados = {
+                cnpj: $("#cnpj").val(),
+                razaoSocial: $("#razaoSocial").val(),
+                nomeFantasia : $("#nomeFantasia").val(),
+                dataConstituicao: $("#dataConstituicao").val(),
+                telefone: $("#telefone").val(),
+                email: $("#email").val(),
+                anotaceos : $("#anotacoes").val()
+            };
+            
+            var data = {
+                action: 'adicionarProtocolo',
+                dados: dados
+            };
+            
+            $.ajax({
+                    url: "http://localhost/tcc/php/ajax.php",
+                    type: "POST",
+                    crossDomain: true,
+                    data: data,
+                    dataType: "json",
+                    success: function (response) {
+                        console.log(response);
+                    },
+                    error: function (xhr, status) {
+                        var result = xhr.responseText;
+                        console.log(xhr.responseText);
+                    }})
+            
         }
     },
     
@@ -43,6 +74,11 @@ window.Promapa = {
         $("#consultarProtocolo").keyup(function(){
             var numProtocolo = $(this).val();
             Promapa.Ajax.buscarProtocolo(numProtocolo);
+        });
+        
+        $("#adicionarProtocolo").click(function(){
+            Promapa.Ajax.adicionarProtocolo();
+           
         });
 
     },

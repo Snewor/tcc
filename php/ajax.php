@@ -8,6 +8,10 @@ if (isset($_POST["action"])) {
         buscarProtocolo($numProtocolo);
 
     }
+    else if($action == 'adicionarProtocolo'){
+        $data = $_POST['dados'];
+        echo json_encode($data, JSON_PRETTY_PRINT);
+    }
 }
 
 /* function buscarProtocolo($numProtocolo){
