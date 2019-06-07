@@ -1,0 +1,62 @@
+.txinfo{
+  
+    margin: 0 auto;
+}
+.options {
+     color: white;
+    background-color: #282828;
+    padding: 10px;
+    display: block;
+    text-decoration: none;
+    width: 100%;
+    margin-bottom: -20px;
+    margin-left: -10px;
+    border: 1px solid white;
+  font-family: 'Nanum Gothic', sans-serif;
+font-family: 'Dosis', sans-serif;
+font-family: 'Raleway', sans-serif;
+}
+.options:visit{
+	text-decoration: none;
+}
+.options:focus{
+    background: #3d7bae;
+}
+.pesquisa{
+	border-radius: 25px;
+    width: 300px;
+    margin-left: 34%;
+    height: 27px;
+}
+.h1pesquisa{
+	text-transform: uppercase;
+	margin-left: 23%;
+    margin-top: 5%;
+    font-size: 40PX;
+}
+.bdnone{
+	border:none !important;
+}
+.bg{
+    background: #202020;
+}
+.logo{
+    position: absolute;
+    top: 10%;
+    left: 28%;
+}
+.itens{
+    margin-top: 20px;
+}
+.navt{
+    width: 108%;
+    height: 70px;
+    background: #202020;
+    margin-top: -8px;
+    margin-left: -12px; 
+    display: visible;
+}
+.info{
+    width: 200px;
+    height: auto;
+}
