@@ -41,3 +41,5 @@ idCliente int,
 usuario_id int,
 created_at  datetime not null
 );
+
+ALTER DATABASE `contato` CHARSET = UTF8 COLLATE = utf8_general_ci;
