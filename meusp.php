@@ -1,5 +1,9 @@
 <?php
+  session_start();
   include 'php/db.php';
+  $user = $_SESSION['user'];
+
+  echo "<script>window.userId = " . $user['id'] . ";</script>"
 ?>
 
 <!DOCTYPE html>
@@ -33,16 +37,17 @@
     </tr>
 
     <?php 
-  $sql = "SELECT * FROM cliente";
+  $userId = $user['id'];
+  $sql = "SELECT * FROM clientes WHERE usuario_id =" . $userId . ";";
   $result = mysqli_query($conexao, $sql);
   $cont = mysqli_affected_rows($conexao);
   $return = '';
       while ($linha = mysqli_fetch_array($result)) {
           $return.= "<tr>"; 
           $return.= "<td>" . utf8_encode($linha["numeroProtocolo"]) . "</td>";
-          $return.= "<td>" . utf8_encode($linha["CNPJ"]) . "</td>";
-          $return.= "<td>" . utf8_encode($linha["nomefantasia"]) . "</td>";
-          $return.= "<td>" . utf8_encode($linha["razaosocial"]) . "</td>";
+          $return.= "<td>" . utf8_encode($linha["cnpj"]) . "</td>";
+          $return.= "<td>" . utf8_encode($linha["nomeFantasia"]) . "</td>";
+          $return.= "<td>" . utf8_encode($linha["razaoSocial"]) . "</td>";
           $return.= "</tr>";
       }
       echo $return;

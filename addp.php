@@ -1,3 +1,11 @@
+<?php
+  session_start();
+  include 'php/db.php';
+  $user = $_SESSION['user'];
+
+  echo "<script>window.userId = " . $user['id'] . ";</script>"
+?>
+
 <!DOCTYPE html>
 <html style="overflow: hidden;">
   <head>	
@@ -23,5 +31,8 @@
 
   <button style="background-color: green; color: white; border:none; padding: 15px;" id="adicionarProtocolo">Adicionar</button>
 </div>
+
+  <div id="result"></div>
+
   </body>
 </html>

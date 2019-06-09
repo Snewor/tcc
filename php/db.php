@@ -2,8 +2,9 @@
     $server = "localhost";
     $user = "root";
     $senha = "";
-    $base = "promapa";
+    $base = "promapa_v2";
     $conexao = mysqli_connect($server, $user, $senha) or die("Erro na conexão!");
+    $conexao->set_charset("utf8");
     mysqli_select_db($conexao, $base);
 
     $pdo = new PDO("mysql:host=$server;dbname=$base",$user,$senha,array(

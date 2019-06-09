@@ -6,15 +6,19 @@
     
     $funcionario_autenticado = false;
 
-    $funcionarios = $pdo->query("SELECT * FROM funcionario;");
+    $funcionarios = $pdo->query("SELECT * FROM usuarios;");
 
     foreach($funcionarios as $user){
         
-        if($user['usuario'] == $_POST['usuario'] && $user['senhafuncionario'] == $_POST['password']  
-          || $user['emailfuncionario'] == $_POST['usuario'] && $user['senhafuncionario'] == $_POST['password']){
+        if($user['nome'] == $_POST['usuario'] && $user['senha'] == $_POST['password']  
+          || $user['email'] == $_POST['usuario'] && $user['senha'] == $_POST['password']){
             $funcionario_autenticado = true;
-            $_SESSION['userlogado'] = $user['nomefuncionario'];
-            $SESSION['userid'] = $user['codfuncionario'];
+            /* $_SESSION['userlogado'] = $user['nome']; */
+            $_SESSION['user'] = array(
+                "nome" => $user['nome'],
+                "id" => $user['id'],
+            );
+           /*  $_SESSION['userid'] = $user['id']; */
         }
     }
 

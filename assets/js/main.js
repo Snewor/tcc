@@ -1,9 +1,10 @@
 window.Promapa = {
     Ajax: {
-        buscarProtocolo: function(numProtocolo){
+        buscarProtocolo: function(numProtocolo, usuarioId){
             data = {
                 action: 'buscarProtocolo',
-                numProtocolo: numProtocolo
+                numProtocolo: numProtocolo,
+                usuarioId: usuarioId
             };
              $.ajax({
                     url: "http://localhost/tcc/php/ajax.php",
@@ -36,20 +37,11 @@ window.Promapa = {
                          $("#resultTable").html(result);
                     }})
         },
-        adicionarProtocolo: function(){
-             var dados = {
-                cnpj: $("#cnpj").val(),
-                razaoSocial: $("#razaoSocial").val(),
-                nomeFantasia : $("#nomeFantasia").val(),
-                dataConstituicao: $("#dataConstituicao").val(),
-                telefone: $("#telefone").val(),
-                email: $("#email").val(),
-                anotaceos : $("#anotacoes").val()
-            };
-            
+        adicionarProtocolo: function(dados, usuarioId){
             var data = {
                 action: 'adicionarProtocolo',
-                dados: dados
+                dados: dados,
+                usuarioId: usuarioId
             };
             
             $.ajax({
@@ -59,25 +51,46 @@ window.Promapa = {
                     data: data,
                     dataType: "json",
                     success: function (response) {
-                        console.log(response);
+                        var html = "<p>" + response + "</p>";
+                        $("#result").html(html);
                     },
                     error: function (xhr, status) {
-                        var result = xhr.responseText;
-                        console.log(xhr.responseText);
+                        var html = "<p>" + xhr.responseText + "</p>";
+                        $("#result").html(html);
                     }})
             
         }
     },
-    
-
     init: function(){
         $("#consultarProtocolo").keyup(function(){
             var numProtocolo = $(this).val();
-            Promapa.Ajax.buscarProtocolo(numProtocolo);
+            var usuarioId = window.usuarioId;
+            Promapa.Ajax.buscarProtocolo(numProtocolo, usuarioId);
         });
         
         $("#adicionarProtocolo").click(function(){
-            Promapa.Ajax.adicionarProtocolo();
+            var usuarioId = window.userId;
+
+            var cnpj = $("#cnpj").val();
+            cnpj = cnpj.replace(/\./g,'').replace('/', '').replace('-', '').trim();
+
+            var dataConstituicao =  $("#dataConstituicao").val().split('/');
+            dataConstituicao = dataConstituicao[2] + "-" + dataConstituicao[1] +  "-" + dataConstituicao[0];
+
+            var telefone = $("#telefone").val();
+            telefone = telefone.replace('-', '').replace('(','').replace(')','').trim();
+
+            var dados = {
+                cnpj: cnpj,
+                razaoSocial: $("#razaoSocial").val(),
+                nomeFantasia : $("#nomeFantasia").val(),
+                dataConstituicao: dataConstituicao,
+                telefone: telefone,
+                email: $("#email").val(),
+                anotacao : $("#anotacoes").val()
+            };
+
+            Promapa.Ajax.adicionarProtocolo(dados, usuarioId);
            
         });
 

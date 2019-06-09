@@ -1,45 +1,44 @@
-create database contato;
+create database promapa;
 
-create table usuarios(
-usuario_id int not null auto_increment primary key,
-codigo int(10) not null,
-nome varchar(100) not null,
-created_at datetime not null
+CREATE TABLE `Usuario` (
+  `id` int not null auto_increment primary key,
+  `codigo` int(10) not null,
+  `nome` varchar(100) NOT NULL,
+  `created_at` datetime not null
 );
 
-CREATE TABLE `cliente` (
-  `idCliente` int(11) NOT NULL,
-  usuario_id int,
-   FOREIGN KEY (usuario_id) references usuarios (usuario_id),
-  `codfuncionario` int(11) NOT NULL,
+CREATE TABLE `Cliente` (
+  `id` int(11) NOT NULL,
+  `usuario_id` int,
   `numeroProtocolo` bigint(12) NOT NULL,
-  `CNPJ` varchar(18) NOT NULL,
-  `razaosocial` varchar(200) NOT NULL,
-  `nomefantasia` char(50) NOT NULL,
-  `datadeconsti` date DEFAULT NULL,
+  `cnpj` varchar(18) NOT NULL,
+  `razaoSocial` varchar(200) NOT NULL,
+  `nomeFantasia` char(50) NOT NULL,
+  `dataConstituicao` date DEFAULT NULL,
   `anotacao` varchar(500) NOT NULL,
   `telefone` varchar(12) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `nomecontato` varchar(50) NOT NULL,
-  created_at datetime not null,
-  updated_at datetime
+  `nomeContato` varchar(50) NOT NULL,
+  `created_at` datetime not null,
+  `updated_at` datetime,
+   FOREIGN KEY (usuario_id) references Usuario (id)
 );
 
-create table LogAcessos(
-usuario_id int,
-LogAc_id int not null primary key auto_increment,
-FOREIGN KEY (usuario_id) references usuarios (usuario_id),
-created_at  datetime not null
+create table 'LogAcessos'(
+`id` int(11) NOT NULL auto_increment primary key,
+`usuario_id` int not null,
+`created_at`  datetime not null,
+FOREIGN KEY (usuario_id) references Usuario (id),
 );
 
 
-create table LogProtocolos(
-LogPr_id int not null primary key auto_increment,
-FOREIGN KEY (usuario_id) references usuarios (usuario_id),
-FOREIGN KEY (idCliente) references cliente (idCliente),
-idCliente int,
-usuario_id int,
-created_at  datetime not null
+create table `LogProtocolos`(
+`id` int not null primary key auto_increment,
+`cliente_id` int not null,
+`usuario_id` int not null,
+`created_at` datetime not null,
+FOREIGN KEY (usuario_id) references Usuario (id),
+FOREIGN KEY (idCliente) references Cliente (id),
 );
 
-ALTER DATABASE `contato` CHARSET = UTF8 COLLATE = utf8_general_ci;
+ALTER DATABASE `promapa` CHARSET = UTF8 COLLATE = utf8_general_ci;
