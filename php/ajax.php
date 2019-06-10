@@ -30,6 +30,7 @@ function buscarProtocolo($numProtocolo, $usuarioId = NULL){
     $senha = "";
     $base = "promapa_v2";
     $conexao = mysqli_connect($server, $user, $senha) or die("Erro na conexão!");
+	$conexao->set_charset("utf8");
     mysqli_select_db($conexao, $base);
 
     if($usuarioId == null){
