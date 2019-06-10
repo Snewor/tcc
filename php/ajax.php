@@ -4,7 +4,7 @@ include 'db.php';
 
 if (isset($_POST["action"])) {
     $action = $_POST["action"];
-
+	
     if($action == 'buscarProtocolo'){
         $numProtocolo = $_POST["numProtocolo"];
         $usuarioId = isset($_POST['usuarioId']) ? $_POST['usuarioId'] : null ;
@@ -38,7 +38,7 @@ function buscarProtocolo($numProtocolo, $usuarioId = NULL){
     else{
         $sql = "SELECT * FROM clientes WHERE numeroProtocolo LIKE '%".$numProtocolo."%' AND usuario_id = ".$usuarioId.";";
     }
-
+	
     $result = mysqli_query($conexao, $sql);
     $cont = mysqli_affected_rows($conexao);
 
@@ -62,6 +62,8 @@ function buscarProtocolo($numProtocolo, $usuarioId = NULL){
 };
 
 function adicionarProtocolo($dados, $usuarioId){
+	session_start();
+			
     $server = "localhost";
     $user = "root";
     $senha = "";
@@ -80,11 +82,31 @@ function adicionarProtocolo($dados, $usuarioId){
     $created_at = date("Y-m-d");
 
     $nomeContato = $nomeFantasia;
-    $numeroProtocolo = '20191245004';
-
+	$usuarioId = $_SESSION['user']['id'];
+	
+	$date = "";
+	$codigo = "";
+	$numero = "";
+	
+	$numProtocoloSql = "SELECT MAX(numeroProtocolo) FROM clientes WHERE usuario_id = ".$usuarioId.";";
+	$numProtocoloResult = mysqli_query($conexao, $numProtocoloSql);
+    $numProtocoloCont = mysqli_affected_rows($conexao);
+	
+	 if ($numProtocoloCont > 0) {
+        while ($linha = mysqli_fetch_array($numProtocoloResult)) {
+            $numProtocolo = $linha[0];
+        } 
+	 }
+	  if($numProtocolo != null){
+		$numeroProtocolo = $numProtocolo + 1; 
+	 }
+	 else{
+		$numeroProtocolo = date("Y") . $_SESSION['user']['codigo'] . "001"; 
+	 }
+	 
     $sql = "INSERT INTO clientes(usuario_id, numeroProtocolo, cnpj, razaoSocial, nomeFantasia, dataConstituicao, anotacao, telefone, email, nomeContato, created_at)
             VALUES(".$usuarioId.", ".$numeroProtocolo.", '".$cnpj."', '".$razaoSocial."', '".$nomeFantasia."', '".$dataConstituicao."', '".$anotacao."', '".$telefone."', '".$email."', '".$nomeContato."', '".$created_at."');";
-        
+       		
     $result = mysqli_query($conexao, $sql);
     $cont = mysqli_affected_rows($conexao);
 
@@ -156,11 +178,11 @@ function criarLogAcesso($usuarioId){
     $cont = mysqli_affected_rows($conexao);
 
     if($cont > 0){
-        echo "Log de acesso inserido com sucesso!";
+       // echo "Log de acesso inserido com sucesso!";
     }
     else{
-        echo "Um erro aconteceu ao cadastrar o log de acesso";
-        echo mysqli_error($conexao);
+       // echo "Um erro aconteceu ao cadastrar o log de acesso";
+       // echo mysqli_error($conexao);
     }
 } 
 

@@ -83,7 +83,7 @@ window.Promapa = {
                         sessionStorage.setItem('login', response.login);
                         sessionStorage.setItem('codigo', response.codigo);
                         sessionStorage.setItem('id', response.id);
-                        window.location = 'index.php';
+                        window.location = 'home.php';
                     }
                 },
                 error: function (xhr, status) {
