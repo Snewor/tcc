@@ -51,25 +51,79 @@ window.Promapa = {
                     data: data,
                     dataType: "json",
                     success: function (response) {
-                        var html = "<p>" + response + "</p>";
-                        $("#result").html(html);
+                        if(response == 1){
+                            window.alert('Protocolo inserido com sucesso!');
+                        }
+                        else if(response != 1){
+                            window.alert('Ocorreu um erro, verifique os dados e tente novamente');
+                        }
+                    /*     var html = "<p>" + response + "</p>";
+                        $("#result").html(html); */
                     },
                     error: function (xhr, status) {
                         var html = "<p>" + xhr.responseText + "</p>";
                         $("#result").html(html);
                     }})
             
+        },
+        autenticarUsuario: function(dados){
+             var data = {
+                action: 'autenticarUsuario',
+                dados: dados
+            };
+
+            $.ajax({
+                url: "http://localhost/tcc/php/ajax.php",
+                type: "POST",
+                crossDomain: true,
+                data: data,
+                dataType: "json",
+                success: function (response) {
+                    if(response != null){
+                        sessionStorage.setItem('login', response.login);
+                        sessionStorage.setItem('codigo', response.codigo);
+                        sessionStorage.setItem('id', response.id);
+                        window.location = 'index.php';
+                    }
+                },
+                error: function (xhr, status) {
+                    var html = "<p>" + xhr.responseText + "</p>";
+                    $("#result").html(html);
+                }})
+        },
+        deslogarUsuario: function(){
+            var data = {
+                action: 'deslogarUsuario'
+            };
+
+            $.ajax({
+                url: "http://localhost/tcc/php/ajax.php",
+                type: "POST",
+                crossDomain: true,
+                data: data,
+                dataType: "json",
+                success: function (response) {
+                    if(response == 1){
+                        sessionStorage.clear();
+                        window.location = 'login.php';
+                    }
+                },
+                error: function (xhr, status) {
+                    var html = "<p>" + xhr.responseText + "</p>";
+                    $("#result").html(html);
+                }})
         }
     },
     init: function(){
         $("#consultarProtocolo").keyup(function(){
             var numProtocolo = $(this).val();
-            var usuarioId = window.usuarioId;
+            var usuarioId = sessionStorage.getItem("id");
             Promapa.Ajax.buscarProtocolo(numProtocolo, usuarioId);
         });
         
-        $("#adicionarProtocolo").click(function(){
-            var usuarioId = window.userId;
+        $("#adicionarProtocolo").click(function(event){
+            event.preventDefault();
+            var usuarioId =sessionStorage.getItem("id");
 
             var cnpj = $("#cnpj").val();
             cnpj = cnpj.replace(/\./g,'').replace('/', '').replace('-', '').trim();
@@ -92,6 +146,20 @@ window.Promapa = {
 
             Promapa.Ajax.adicionarProtocolo(dados, usuarioId);
            
+        });
+
+        $("#btnLogin").click(function(event){
+            event.preventDefault();
+            var dados = {
+                login: $("#login").val(),
+                senha: $("#senha").val()
+            };
+
+            Promapa.Ajax.autenticarUsuario(dados);
+        });
+
+        $("#logoff").click(function(){
+            Promapa.Ajax.deslogarUsuario();
         });
 
     },

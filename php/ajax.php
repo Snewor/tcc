@@ -1,7 +1,6 @@
 <?php
 
 include 'db.php';
-echo $conexao->character_set_name();
 
 if (isset($_POST["action"])) {
     $action = $_POST["action"];
@@ -10,12 +9,18 @@ if (isset($_POST["action"])) {
         $numProtocolo = $_POST["numProtocolo"];
         $usuarioId = isset($_POST['usuarioId']) ? $_POST['usuarioId'] : null ;
         buscarProtocolo($numProtocolo, $usuarioId);
-
     }
     else if($action == 'adicionarProtocolo'){
         $data = $_POST['dados'];
         $usuarioId = $_POST['usuarioId'];
         adicionarProtocolo($data, $usuarioId);
+    }
+    else if($action == 'autenticarUsuario'){
+        $dados = $_POST['dados'];
+        autenticarUsuario($dados);
+    }
+    else if($action == 'deslogarUsuario'){
+        deslogarUsuario();
     }
 }
 
@@ -25,14 +30,13 @@ function buscarProtocolo($numProtocolo, $usuarioId = NULL){
     $senha = "";
     $base = "promapa_v2";
     $conexao = mysqli_connect($server, $user, $senha) or die("Erro na conexão!");
-    $conexao->set_charset("utf8");
     mysqli_select_db($conexao, $base);
 
     if($usuarioId == null){
         $sql = "SELECT * FROM clientes WHERE numeroProtocolo LIKE '%".$numProtocolo."%'";
     }
     else{
-        $sql = "SELECT * FROM clientes WHERE numeroProtocolo LIKE '%".$numProtocolo."%' AND usuario_id =".$usuarioId.";";
+        $sql = "SELECT * FROM clientes WHERE numeroProtocolo LIKE '%".$numProtocolo."%' AND usuario_id = ".$usuarioId.";";
     }
 
     $result = mysqli_query($conexao, $sql);
@@ -43,14 +47,15 @@ function buscarProtocolo($numProtocolo, $usuarioId = NULL){
 
         while ($linha = mysqli_fetch_array($result)) {
             $returnArray = array(
-                "numeroProtocolo" => $linha["numeroProtocolo"],
-                "CNPJ" => $linha["cnpj"],
-                "nomefantasia" => $linha["nomeFantasia"],
-                "razaosocial" => $linha["razaoSocial"]
+                "numeroProtocolo" => utf8_encode($linha["numeroProtocolo"]),
+                "CNPJ" => utf8_encode($linha["cnpj"]),
+                "nomefantasia" => utf8_encode($linha["nomeFantasia"]),
+                "razaosocial" => utf8_encode($linha["razaoSocial"])
             );
             array_push($response, $returnArray);
         }
-        echo json_encode($response);
+        echo json_encode($response);   
+
     } else {
         echo "Não foram encontrados registros!";
     }
@@ -75,7 +80,7 @@ function adicionarProtocolo($dados, $usuarioId){
     $created_at = date("Y-m-d");
 
     $nomeContato = $nomeFantasia;
-    $numeroProtocolo = '23456789213';
+    $numeroProtocolo = '20191245004';
 
     $sql = "INSERT INTO clientes(usuario_id, numeroProtocolo, cnpj, razaoSocial, nomeFantasia, dataConstituicao, anotacao, telefone, email, nomeContato, created_at)
             VALUES(".$usuarioId.", ".$numeroProtocolo.", '".$cnpj."', '".$razaoSocial."', '".$nomeFantasia."', '".$dataConstituicao."', '".$anotacao."', '".$telefone."', '".$email."', '".$nomeContato."', '".$created_at."');";
@@ -84,7 +89,6 @@ function adicionarProtocolo($dados, $usuarioId){
     $cont = mysqli_affected_rows($conexao);
 
     if($cont > 0){
-        echo "Registro inserido com sucesso!";
         $insertId = mysqli_insert_id($conexao);
         criarLogProtocolo($insertId, $usuarioId);
     }
@@ -93,6 +97,73 @@ function adicionarProtocolo($dados, $usuarioId){
         echo mysqli_error($conexao);
     }
 }
+
+function autenticarUsuario($dados){
+    session_start();
+
+    $server = "localhost";
+    $user = "root";
+    $senha = "";
+    $base = "promapa_v2";
+    $conexao = mysqli_connect($server, $user, $senha) or die("Erro na conexão!");
+    mysqli_select_db($conexao, $base);
+
+    $usuarioLogado = false;
+
+    $login = $dados['login'];
+    $senha = $dados['senha'];
+
+    $sql = "SELECT * FROM usuarios WHERE nome = '".$login."' AND senha = '".$senha."';";
+    
+    $result = mysqli_query($conexao, $sql);
+    $cont = mysqli_affected_rows($conexao);
+
+    if($cont > 0){
+        while($fetchArray = mysqli_fetch_array($result)){
+            $_SESSION['user'] = array(
+                "login" => $fetchArray['nome'],
+                "id" => $fetchArray['id'],
+                "codigo" => $fetchArray['codigo']
+            );
+        };
+
+        echo json_encode($_SESSION['user']);
+
+        $userId = $_SESSION['user']['id'];
+        criarLogAcesso($userId); 
+    }
+    else{
+        echo "Um erro aconteceu ao cadastrar o log de protocolo";
+        echo mysqli_error($conexao);
+    }
+};
+
+function criarLogAcesso($usuarioId){
+    $server = "localhost";
+    $user = "root";
+    $senha = "";
+    $base = "promapa_v2";
+    $conexao = mysqli_connect($server, $user, $senha) or die("Erro na conexão!");
+    $conexao->set_charset("utf8");
+    mysqli_select_db($conexao, $base);
+
+    $created_at = date("Y-m-d");
+
+    $sql = "INSERT INTO logacessos(usuario_id, created_at)
+            VALUES(".$usuarioId.", '".$created_at."');";
+
+    $result = mysqli_query($conexao, $sql);
+    $cont = mysqli_affected_rows($conexao);
+
+    if($cont > 0){
+        echo "Log de acesso inserido com sucesso!";
+    }
+    else{
+        echo "Um erro aconteceu ao cadastrar o log de acesso";
+        echo mysqli_error($conexao);
+    }
+} 
+
 
 function criarLogProtocolo($clienteId, $usuarioId){
     $server = "localhost";
@@ -112,13 +183,19 @@ function criarLogProtocolo($clienteId, $usuarioId){
     $cont = mysqli_affected_rows($conexao);
 
     if($cont > 0){
-        echo "Log de criação de protocolo inserido com sucesso!";
+        echo true;
     }
     else{
-        echo "Um erro aconteceu ao cadastrar o log de protocolo";
+        echo false;;
         echo mysqli_error($conexao);
     }
 }
- 
+
+function deslogarUsuario(){
+    session_start();
+    session_destroy();
+
+    echo true;
+}
 
 ?>

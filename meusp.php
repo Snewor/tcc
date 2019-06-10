@@ -2,8 +2,6 @@
   session_start();
   include 'php/db.php';
   $user = $_SESSION['user'];
-
-  echo "<script>window.userId = " . $user['id'] . ";</script>"
 ?>
 
 <!DOCTYPE html>
