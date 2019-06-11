@@ -1,10 +1,4 @@
-<?php
-    session_start();
 
-    if(isset($_SESSION['usuariologado']) || $_SESSION['usuariologado']){
-         header('Location: home.php'); 
-    }
-?>
 
 <html lang="pt-br">
   <head>

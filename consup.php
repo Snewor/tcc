@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html>
-  <head>
-   <link rel="stylesheet" type="text/css" href="style.css"/>
-   <script src="assets/js/jquery-3.4.1.min.js"></script>
-      <script src="assets/js/jquery.mask.js"></script>
-   <script src="assets/js/main.js"></script>
-  </head>
-  <body>
+<?php
+    include('header.php');
+?>
+
       <div style="width: 108%;
     margin-top: -8px; margin-left: -12px; background: #202020; height: 70px;">
       

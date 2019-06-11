@@ -5,9 +5,7 @@
     display: block;
     text-decoration: none;
     width: 100%;
-    margin-bottom: -20px;
-    margin-left: -10px;
-    border: 1px solid white;
+
   font-family: 'Nanum Gothic', sans-serif;
 font-family: 'Dosis', sans-serif;
 font-family: 'Raleway', sans-serif;
@@ -15,6 +13,14 @@ font-family: 'Raleway', sans-serif;
 .options:visit{
 	text-decoration: none;
 }
+
+.options:hover{
+    color: inherit;
+    text-decoration:none;
+    background-color: #fff;
+    transition: .3s all;
+}
+
 .options:focus{
     background: #3d7bae;
 }
@@ -41,3 +47,5 @@ font-family: 'Raleway', sans-serif;
     top: 10%;
     left: 28%;
 }
+
+

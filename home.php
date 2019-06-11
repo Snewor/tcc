@@ -1,30 +1,18 @@
-
-<!DOCTYPE>
-<html lang="pt-br">
- <head>
- 	<title>PROMAPA ASSESSORIA</title>
- 	<link href="https://fonts.googleapis.com/css?family=Dosis|Nanum+Gothic|Raleway&display=swap" rel="stylesheet">
-     <script src="assets/js/jquery.mask.js"></script>
- 	<link rel="icon" type="imagem/png" href="icon.png" />
-  <meta charset="UTF-8"/>
-     <link rel="stylesheet" type="text/css" href="style.css"/>
- </head>
-      <frameset cols="20%,80%,*" border="0px">
-        <frame src="menu.php" resize="no"></frame>
-        <frame src="corpo.html" Name="site" noresize="yes"></frame>
-      </frameset>
-      <link rel="stylesheet" type="text/css" href="style.css"/>
-    <?php 
-
-            session_start();
-    
-            if(!isset($_SESSION['usuariologado']) || !$_SESSION['usuariologado']){
-                 header('Location: index.php'); 
-            }
-
-        ?>
+<?php
+    include('header.php');
+  echo $_SESSION['usuarioLogado'];
+    ?>
 	<body>
+        
+<div style="width: 108%;
+    margin-top: -8px; margin-left: -12px; background: #202020; height: 70px;">
+    	
+    </div>
 
+
+	<img src="logo.jpg" class="logonav" style="position: relative; margin-top: 7%;; left: 28%;">
+
+	<h2 style="position: relative; left: 45%;">Bem-vindo</h2>
 		
 	</body>
 

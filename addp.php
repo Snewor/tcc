@@ -1,21 +1,12 @@
 <?php
-  session_start();
-  include 'php/db.php';
-  $user = $_SESSION['user'];
+    include('header.php');
 
-  echo "<script>window.userId = " . $user['id'] . ";</script>"
+    include 'php/db.php';
+    $user = $_SESSION['user'];
+
+    echo "<script>window.userId = " . $user['id'] . ";</script>"
 ?>
 
-<!DOCTYPE html>
-<html style="overflow: hidden;">
-  <head>	
-      <script src="assets/js/jquery-3.4.1.min.js"></script>
-	   <script src="assets/js/jquery.mask.js"></script>
-      <script src="assets/js/main.js"></script>
-	  
-
-  </head>
-  <body>
 <div style="width: 108%;
     margin-top: -8px; margin-left: -12px; background: #202020; height: 70px;">
     	
