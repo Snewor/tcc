@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.2
+-- version 4.8.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 09-Jun-2019 às 21:56
--- Versão do servidor: 10.1.34-MariaDB
--- PHP Version: 7.2.8
+-- Generation Time: 11-Jun-2019 às 02:36
+-- Versão do servidor: 10.1.33-MariaDB
+-- PHP Version: 7.2.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -49,9 +49,9 @@ CREATE TABLE `clientes` (
 --
 
 INSERT INTO `clientes` (`id`, `usuario_id`, `numeroProtocolo`, `cnpj`, `razaoSocial`, `nomeFantasia`, `dataConstituicao`, `anotacao`, `telefone`, `email`, `nomeContato`, `created_at`, `updated_at`) VALUES
-(1, 1, 742617000027, '45781347000157', 'João da Silva Barbosa ME', 'Empresa do João', '0000-00-00', 'Cliente ligou para o funcionario admin', '11999999999', 'joao@barbosa.com.br', 'João Barbosa', '2019-06-07', NULL),
-(2, 1, 785412369856, '02556741000189', 'Pablo Santos Lopes LTDA', 'Pablinros CO', '2005-06-12', 'Ligou para o funcionario admin', '11982866202', 'sac@pablinros.om.br', 'Pablinros', '2019-06-07', NULL),
-(15, 1, 23456789213, '12345678910', 'Razão de Teste', 'Leandro Henrique Martins', '2008-12-21', 'anotação', '1121566476', 'snewor@hotmail.com', 'Leandro Henrique Martins', '2019-06-09', NULL);
+(1, 1, 20191234001, '45781347000157', 'João da Silva Barbosa ME', 'Empresa do João', '0000-00-00', 'Cliente ligou para o funcionario admin', '11999999999', 'joao@barbosa.com.br', 'João Barbosa', '2019-06-07', NULL),
+(2, 1, 20191234002, '02556741000189', 'Pablo Santos Lopes LTDA', 'Pablinros CO', '2005-06-12', 'Ligou para o funcionario admin', '11982866202', 'sac@pablinros.om.br', 'Pablinros', '2019-06-07', NULL),
+(15, 1, 20191234003, '12345678910', 'Razão de Teste', 'Leandro Henrique Martins', '2008-12-21', 'anotação', '1121566476', 'snewor@hotmail.com', 'Leandro Henrique Martins', '2019-06-09', NULL);
 
 -- --------------------------------------------------------
 
