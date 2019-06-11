@@ -10,6 +10,10 @@ if (isset($_POST["action"])) {
         $usuarioId = isset($_POST['usuarioId']) ? $_POST['usuarioId'] : null ;
         buscarProtocolo($numProtocolo, $usuarioId);
     }
+    else if($action == 'buscarProtocoloPorCliente'){
+        $cliente = $_POST['cliente'];
+        buscarProtocoloPorCliente($cliente);
+    }
     else if($action == 'adicionarProtocolo'){
         $data = $_POST['dados'];
         $usuarioId = $_POST['usuarioId'];
@@ -83,7 +87,23 @@ function adicionarProtocolo($dados, $usuarioId){
     $created_at = date("Y-m-d");
 
     $nomeContato = $nomeFantasia;
-	$usuarioId = $_SESSION['user']['id'];
+	$usuarioId = $_SESSION['user']['id'];    
+    
+    $clienteSql = "SELECT * FROM clientes WHERE cnpj = '" .$cnpj. "' AND dataConstituicao = '" . $dataConstituicao . "';";
+    
+    try{
+         $clienteResult = mysqli_query($conexao, $clienteSql);
+         $clienteCont = mysqli_affected_rows($conexao);
+
+         if($clienteCont > 0){
+            echo json_encode("");
+            throw new Exception('Ja existe um protocolo cadastrado para esse cliente!');
+         }
+    }
+    catch(Exception $e){
+        echo $e;
+    }
+   
 	
 	$date = "";
 	$codigo = "";
@@ -187,6 +207,17 @@ function criarLogAcesso($usuarioId){
     }
 } 
 
+function buscarProtocoloPorCliente($cliente){
+    $server = "localhost";
+    $user = "root";
+    $senha = "";
+    $base = "promapa_v2";
+    $conexao = mysqli_connect($server, $user, $senha) or die("Erro na conexão!");
+    $conexao->set_charset("utf8");
+    mysqli_select_db($conexao, $base);
+    
+   
+}
 
 function criarLogProtocolo($clienteId, $usuarioId){
     $server = "localhost";
