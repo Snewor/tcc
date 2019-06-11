@@ -106,7 +106,7 @@ window.Promapa = {
                 success: function (response) {
                     if(response == 1){
                         sessionStorage.clear();
-                        window.location = 'login.php';
+                        window.location = 'index.php';
                     }
                 },
                 error: function (xhr, status) {
