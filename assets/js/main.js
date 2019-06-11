@@ -62,6 +62,7 @@ window.Promapa = {
                     },
                     error: function (xhr, status) {
                         var html = "<p>" + xhr.responseText + "</p>";
+                        html = html.replace("", '').split('!');
                         $("#result").html(html);
                     }})
             
@@ -115,12 +116,7 @@ window.Promapa = {
         },
        
     },
-    init: function(){
-		$("#cnpj").mask('00.000.000/0000-00');
-		$("#dataConstituicao").mask('00/00/0000');
-		$("#telefone").mask('(00) 0000-0000');
-		
-		
+    init: function(){		
         $("#consultarProtocolo").keyup(function(){
             var numProtocolo = $(this).val();
             var usuarioId = sessionStorage.getItem("id");
