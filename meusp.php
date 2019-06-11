@@ -22,8 +22,11 @@
   </style>
   </head>
   <body>
-
-  <span>CONSULTAR PROTOCOLO</span> <input type="text" placeholder="Insira o número de protocolo" id="consultarProtocolo">
+<div style="width: 108%;
+    margin-top: -8px; margin-left: -12px; background: #202020; height: 70px;">
+      
+    </div>
+  <span style="font-size: 60px;">MEUS PROTOCOLOS</span> <input type="text" placeholder="CNPJ, PROTOCOLO, NOME FANTASIA..." style="margin-left: 160px; border-radius:50px; width: 271px; padding: 10px;"  id="consultarProtocolo">
 
   <table style="width:100%" id="resultTable">
     <caption>Protocolos</caption>

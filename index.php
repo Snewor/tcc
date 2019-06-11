@@ -6,6 +6,7 @@
     <script src="assets/js/jquery-3.4.1.min.js"></script>
     <script src="assets/js/main.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      <script src="assets/js/jquery.mask.js"></script>
 
     <style>
       .card-login {

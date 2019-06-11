@@ -4,6 +4,7 @@
  <head>
  	<title>PROMAPA ASSESSORIA</title>
  	<link href="https://fonts.googleapis.com/css?family=Dosis|Nanum+Gothic|Raleway&display=swap" rel="stylesheet">
+     <script src="assets/js/jquery.mask.js"></script>
  	<link rel="icon" type="imagem/png" href="icon.png" />
   <meta charset="UTF-8"/>
      <link rel="stylesheet" type="text/css" href="style.css"/>
