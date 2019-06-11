@@ -55,7 +55,7 @@ window.Promapa = {
                             window.alert('Protocolo inserido com sucesso!');
                         }
                         else if(response != 1){
-                            window.alert('Ocorreu um erro, verifique os dados e tente novamente');
+                            window.alert('Ocorreu um erro, ' + response);
                         }
                     /*     var html = "<p>" + response + "</p>";
                         $("#result").html(html); */
@@ -112,7 +112,8 @@ window.Promapa = {
                     var html = "<p>" + xhr.responseText + "</p>";
                     $("#result").html(html);
                 }})
-        }
+        },
+       
     },
     init: function(){
 		$("#cnpj").mask('00.000.000/0000-00');
@@ -140,7 +141,12 @@ window.Promapa = {
 
 				var telefone = $("#telefone").val();
 				telefone = telefone.replace('-', '').replace('(','').replace(')','').trim();
-
+                
+                var cliente = {
+                    cnpj: cnpj,
+                    dataConstituicao: dataConstituicao
+                };
+                
 				var dados = {
 					cnpj: cnpj,
 					razaoSocial: $("#razaoSocial").val(),
@@ -179,7 +185,7 @@ window.Promapa = {
         	
 		validateAll: function(){
 			var message = '';
-			var valid = false;
+			var valid = true;
 				
 			if($("#cnpj").val().trim() == '' || $("#cnpj").val() == null || $("#cnpj").val() < 18){
 				message = 'Insira um CNPJ válido';
@@ -208,7 +214,6 @@ window.Promapa = {
 			if(date > new Date()){
 				message = 'A data de constituição não pode ser maior que a data atual!';
 				valid = false;
-				
 			};
 			
 			if($("#telefone").val().trim() == '' || $("#telefone").val() == null || $("#telefone").val() < 13){
@@ -223,8 +228,7 @@ window.Promapa = {
 				
 			};
 			
-			valid = true;
-			
+            $("#errorMsg").text(message);
 			return valid;
         }
 			
