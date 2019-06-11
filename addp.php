@@ -35,6 +35,16 @@
 </div>
 
   <div id="result"></div>
+      
+      <script>
+          
+        $(document).ready(function(){
+            $("#cnpj").mask('00.000.000/0000-00');
+            $("#dataConstituicao").mask('00/00/0000');
+            $("#telefone").mask('(00) 0000-0000');
+        });
+          
+      </script>
 
   </body>
 </html>
