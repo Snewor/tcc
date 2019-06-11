@@ -96,15 +96,16 @@ function adicionarProtocolo($dados, $usuarioId){
          $clienteCont = mysqli_affected_rows($conexao);
 
          if($clienteCont > 0){
-            echo json_encode("");
-            throw new Exception('Ja existe um protocolo cadastrado para esse cliente!');
-         }
+             throw new Exception('Ja existe um protocolo cadastrado para esse cliente!');
+
+        }
     }
-    catch(Exception $e){
-        echo $e;
-    }
-   
-	
+    catch(Exception $ex){
+        echo $ex;
+        die();
+    };
+    
+
 	$date = "";
 	$codigo = "";
 	$numero = "";
@@ -151,7 +152,7 @@ function autenticarUsuario($dados){
     $conexao = mysqli_connect($server, $user, $senha) or die("Erro na conexão!");
     mysqli_select_db($conexao, $base);
 
-    $usuarioLogado = false;
+    $_SESSION['usuarioLogado'] = false;
 
     $login = $dados['login'];
     $senha = $dados['senha'];
@@ -169,6 +170,8 @@ function autenticarUsuario($dados){
                 "codigo" => $fetchArray['codigo']
             );
         };
+        
+        $_SESSION['usuarioLogado'] = true;
 
         echo json_encode($_SESSION['user']);
 
