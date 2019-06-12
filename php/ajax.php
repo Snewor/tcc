@@ -55,7 +55,11 @@ function buscarProtocolo($numProtocolo, $usuarioId = NULL){
                 "numeroProtocolo" => utf8_encode($linha["numeroProtocolo"]),
                 "CNPJ" => utf8_encode($linha["cnpj"]),
                 "nomefantasia" => utf8_encode($linha["nomeFantasia"]),
-                "razaosocial" => utf8_encode($linha["razaoSocial"])
+                "razaosocial" => utf8_encode($linha["razaoSocial"]),
+                "dataConstituicao" => utf8_encode($linha["dataConstituicao"]),
+                "telefone" => utf8_encode($linha["telefone"]),
+                "anotacao" => utf8_encode($linha["anotacao"]),
+                "email" => utf8_encode($linha["email"])
             );
             array_push($response, $returnArray);
         }

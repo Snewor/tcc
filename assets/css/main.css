@@ -4,6 +4,14 @@ body {
   /* .sidebar */
   /* .main-content */
 }
+.page-content{
+    padding:39px;
+}
+.page-heading{
+        display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 
 body .navbar-container {
   background: rgba(12, 144, 252, 0.87);
@@ -12,11 +20,24 @@ body .navbar-container {
 
 div#sidebar-wrapper {
     display: block;
-    width: 20%;
-    height: 100vh;
-    position: absolute;
+    height: calc(100vh - 126px);
+    position: relative;
     left: 0;
     background-color: #363636;
+}
+
+  tr {
+      border: 1px solid black;
+      border-collapse: collapse;
+  }
+  th, td {
+      padding: 5px;
+      text-align: center;
+      border-left: 1px solid black;
+      text-transform: uppercase;
+  }
+     tr:nth-child(odd) {
+    background-color: #f5f5f5;
 }
 
 ul.sidebar-nav {
@@ -125,5 +146,9 @@ body .main-content .card-container .card .card-desc {
 body .main-content .card-container .card .card-desc h5 {
   font-size: 14px;
   color: rgba(12, 144, 252, 0.87);
+}
+.wrapper-content{
+    display: grid;
+    grid-template-columns: 20% auto;
 }
 /*# sourceMappingURL=main.css.map */

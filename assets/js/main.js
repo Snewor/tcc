@@ -14,12 +14,15 @@ window.Promapa = {
                     dataType: "json",
                     success: function (response) {
                         var html = '';
-                        html += '<caption>Protocolos</caption>';
                         html += '<tr class="bd-none">';
                         html += '<th>Nº PROTOCOLO</th>';
                         html += '<th>CNPJ</th>';
                         html += '<th>NOME FANTASIA</th>';
                         html += '<th>RAZÃO SOCIAL</th>';
+                        html += '<th>DATA DE CONSTITUIÇÃO</th>';
+                        html += '<th>TELEFONE</th>';
+                        html += '<th>ANOTAÇÃO</th>';
+                        html += '<th>EMAIL</th>';
 
                         for(var i = 0; i < response.length; i++){
                             html += "<tr>"; 
@@ -27,6 +30,10 @@ window.Promapa = {
                             html += "<td>" + response[i].CNPJ + "</td>";
                             html += "<td>" + response[i].nomefantasia + "</td>";
                             html += "<td>" + response[i].razaosocial + "</td>";
+                            html += "<td>" + response[i].dataConstituicao + "</td>";
+                            html += "<td>" + response[i].telefone + "</td>";
+                            html += "<td>" + response[i].anotacao + "</td>";
+                            html += "<td>" + response[i].email + "</td>";
                             html += "</tr>";
                         }
                         $("#resultTable").children().remove();

@@ -28,19 +28,29 @@
   </head>
     
   <body>
-   <nav class="navbar navbar-dark bg-dark">
+   <nav class="navbar navbar-dark" style="background-color:#363636;">
       <a class="navbar-brand" href="#">
         <img src="logon.png" width="275" height="100" class="d-inline-block align-top" alt="">
       </a>
        
-       <h6 class="ml-auto">Bem vindo, <?php echo $_SESSION['user']['login']; ?></h6>
+       <h6 class="ml-auto" style="color: white;">Bem vindo, <?php echo $_SESSION['user']['login']; ?></h6>
     </nav>
-      
+      <div class="wrapper-content">
    <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <li> <a href="meusp.php" target="_self" class="options">MEUS PROTOCOLOS</a> </li>
             <li> <a href="consup.php" target="_self" class="options">CONSULTAR PROTOCOLO</a> </li>
             <li> <a href="addp.php" target="_self" class="options">ADICIONAR PROTOCOLOS</a> </li>
-            <li> <a href="javascript:void(0)" id="logoff">SAIR</a> </li>
+            <li> <a style="width: 100%;
+    font-weight: bold;
+    color: white;
+    background-color: darkred;
+    padding: 10px;
+    position: absolute;
+    top: 93%;
+    text-align: center;
+    right: 0px;
+    text-transform: uppercase;
+    text-decoration: none;" href="javascript:void(0)" id="logoff">SAIR</a> </li>
         </ul>
     </div> <!-- /#sidebar-wrapper -->

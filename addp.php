@@ -7,10 +7,7 @@
     echo "<script>window.userId = " . $user['id'] . ";</script>"
 ?>
 
-<div style="width: 108%;
-    margin-top: -8px; margin-left: -12px; background: #202020; height: 70px;">
-    	
-    </div>
+    <div class="page-content">
 
   <h2 style="font-size: 60px; margin-left: 330px;">ADICIONAR PROTOCOLO</h2>
   <div style="width: 350px; margin: 0 auto">
@@ -36,6 +33,7 @@
         });
           
       </script>
-
+</div>
+</div>
   </body>
 </html>
